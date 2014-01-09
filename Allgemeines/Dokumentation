@@ -1,0 +1,36 @@
+Dokumentation
+
+Variablen
+
+handles
+    config
+        Pges            :   cell? MGx1
+        mg              :   integer
+        t               :   integer
+        marktgebiet     :   cell MGx2   :   siehe config
+        dateiname
+            ntc         :   string
+            nachfrage   :   string
+            kwpark      :   cell 1x2
+        Spalten...      :               :   siehe config
+        Pfad
+            Eingangsdaten   :   string  :   Pfad zu den Eingangsdaten
+    daten
+        
+        status
+            imex        :   boolean
+        MaxPges         :   double
+        sekkmatrix      :   ? MGxMaxPges+1 ?   
+        MG              :   double
+        T               :   double
+        nachfrage       :   double MGxT
+        co2preis        : double        :   CO2-Zertifikatspreis
+        ntc             : cell MGxMG    :   NTC-Matrix
+        marktgebiet     
+            sekk        : double 1xPges :   SEK-Kurve
+            Pges                        :   Bruttostromerzeugungskapazität
+            kwpark                      :   thermischer KWPark
+            energiespeicher             :   E003
+            kep         : double KWxT   : Kraftwerkseinsatz
+        lastsaldo       : double MGxT   :   Nachfrage um Ex/Im bereinigt
+        export          :   cell 1xT    :   Exportmatrix für jeden Zeitpunkt

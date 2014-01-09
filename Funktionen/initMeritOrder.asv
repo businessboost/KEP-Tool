@@ -1,0 +1,29 @@
+function merit_order = initMeritOrder(thermo_park)
+% merit_order creates the merit order of the given thermic powerplantpark
+% thermo_parc
+%
+% Input: thermo_parc (PPx5 double), thermic powerplantpark,
+                                    % 2nd colum are the variable costs,
+                                    % 4th column is the maximum Power of
+                                    % the powerplants
+% Output: merit_order (1xtotal_power double), function that gives the costs
+                                            % of producing power by the
+                                            % amount of the inex
+% Algorithm: creates the merit order by sorting the capaciti
+% Date: 05.01.2014
+% Version: 1.0
+% Known bugs: none
+% Functions used: nothing special
+  thermo_park = sortrows(thermo_park,2); % sorts the powerplants by the variable costs
+  total_power = sum(thermo_park(:,4)); % total power that the powerplants of the market may produce
+  PP = size(thermo_park,1); % PP is the numer of thermic powerplants in a market (KW= german Kraftwerk)
+  merit_order = zeros(1,total_power+1); % creating the merit order, +1 because of the last value for inf
+  p = 1; % power
+  for pp = 1 : PP
+    Pmax = thermo_park(pp,4);
+    merit_order(1,p:p-1+pmaxkw) = ones(1,Pmax)*thermo_park(pp,2);
+    p = p + Pmax;
+  end
+  merit_order(1,end) = inf;
+end
+
