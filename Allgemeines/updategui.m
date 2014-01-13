@@ -1,3 +1,4 @@
+disp('Update graphic user interface');
 % ntc
 set(handles.tbl_ntc,'Data',handles.daten.ntc);
 set(handles.tbl_ntc,'ColumnName',handles.config.marktgebiet(:,2));

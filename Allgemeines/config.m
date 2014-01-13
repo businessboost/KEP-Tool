@@ -1,9 +1,5 @@
 %Namen und Kennzeichnung der Marktgebiet: 
     %(Reihenfolge muss der NTC-Matrix und Nachfragematrix entsprechen)
-handles.config.pfad.daten = 'Daten\beispiel_1\';
-handles.config.pfad.eingangsdaten = [handles.config.pfad.daten 'Eingangsdaten'];
-handles.config.pfad.ausgangsdaten = [handles.config.pfad.daten 'Ausgangsdaten'];
-
 
 handles.config.marktgebiet = {
 'Belgien'       'B';

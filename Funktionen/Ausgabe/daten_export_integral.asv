@@ -8,8 +8,7 @@ disp('Daten werden für Integral gespeichert');
 % Ordnername der Ausgabe
     % Datum
     % Optional: KEP-Nummer für Datum
-% Ordner erstellen
-  mkdir([handles.config.pfad.ausgangsdaten '\' string_datum '-KEP']);
+
 
 
 %für jeden NNF csv datei schreiben

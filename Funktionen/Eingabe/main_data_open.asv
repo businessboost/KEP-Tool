@@ -39,7 +39,7 @@ if (handles.config.pfad.eingangsdaten~=0)
   end
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % calculate Merit Order and total powers
+  % setting up 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   disp('Calculating merit orders and total powers');
   handles.daten.Pges = zeros(handles.daten.MG,1); % F001 Relevanz prüfen
@@ -54,9 +54,4 @@ if (handles.config.pfad.eingangsdaten~=0)
     handles.daten.marktgebiet{mg}.sekk = [0 cumsum(handles.daten.marktgebiet{mg}.meritorder)];
   end
   handles.daten.MaxPges = max(handles.daten.Pges); % F001 Relevanz prüfen
-  
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  % Init export and load_balance
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  [handles.daten.exporte, handles.daten.load_balance] = init(handles.daten.MG,handles.daten.T,handles.daten.nachfrage);
 end

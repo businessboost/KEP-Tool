@@ -22,7 +22,7 @@ function varargout = KEP(varargin)
 
 % Edit the above text to modify the response to help KEP
 
-% Last Modified by GUIDE v2.5 08-Jan-2014 23:52:18
+% Last Modified by GUIDE v2.5 12-Jan-2014 23:18:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -270,7 +270,7 @@ catch fehler
   disp(fehler);
 end
 if calculation_successfull
-  set(handles.menu_datenspeichern_integral,'Enable','on');
+  set(handles.menu_data_export,'Enable','on');
 end
 
 
@@ -316,16 +316,11 @@ updategui;
 
 
 % --------------------------------------------------------------------
-function menu_datenspeichern_integral_Callback(hObject, eventdata, handles)
-% hObject    handle to menu_datenspeichern_integral (see GCBO)
+function menu_data_export_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_data_export (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-string_datum = strrep(datestr(now), ':', '_');
-string_datum(15) = 'h';
-string_datum(18) = 'm';
-string_datum(21) = 's';
-daten_speichern_integral;
-main_data_export_analysis;
+main_data_export;
 
 
 % --------------------------------------------------------------------
@@ -336,7 +331,6 @@ function menu_data_open_Callback(hObject, eventdata, handles)
 
 eingabe_erfolgreich = true;
 main_data_open;
-main_init;
 updategui;
 try
 catch

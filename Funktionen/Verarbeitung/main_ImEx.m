@@ -19,9 +19,9 @@
 %          : t
 
 % Declaration
-handles.daten.load_balance = zeros(handles.daten.MG,handles.daten.T);
+% old: handles.daten.load_balance = zeros(handles.daten.MG,handles.daten.T);
 array_parks = cell(handles.daten.MG,1);
-
+array_hydro = cell(handles.daten.MG,1);
 
 % create array of all parks
   for mg = 1 : handles.daten.MG
@@ -43,8 +43,7 @@ handles.daten.nachfrage_after_hydro = handles.daten.nachfrage;
       if (size(array_hydro,2)>0)
         for mg = 1 : handles.daten.MG
           if (size(array_hydro{mg},2)>0)
-            
-        handles.daten.nachfrage_after_hydro(mg,t) = handles.daten.nachfrage(mg,t) - sum(array_hydro{mg}(:,4));  
+           handles.daten.nachfrage_after_hydro(mg,t) = handles.daten.nachfrage(mg,t) - sum(array_hydro{mg}(:,4));  
           end
          end
       end
