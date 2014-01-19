@@ -22,7 +22,11 @@ function varargout = KEP(varargin)
 
 % Edit the above text to modify the response to help KEP
 
+<<<<<<< HEAD
 % Last Modified by GUIDE v2.5 19-Jan-2014 23:28:42
+=======
+% Last Modified by GUIDE v2.5 19-Jan-2014 21:45:56
+>>>>>>> master
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -410,6 +414,7 @@ function menu_data_open_entsoe_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 main_data_open_entsoe;
+<<<<<<< HEAD
 updategui;
 
 % --------------------------------------------------------------------
@@ -432,3 +437,5 @@ function menu_data_export_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 main_data_export;
+=======
+>>>>>>> master
