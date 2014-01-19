@@ -7,3 +7,4 @@ else
   disp('Falscher Ordner ausgewählt. Bitte Ordner mit dem Namen IBM auswählen.')
   disp('Alternativ kann auch einfach per addpath()-Befehl ..\ILOG\CPLEX_Studio126\cplex\examples\src\matlab und ..\ILOG\CPLEX_Studio126\cplex\matlab\x64_win64 eingebunden werden.');
 end
+savepath;
