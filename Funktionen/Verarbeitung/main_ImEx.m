@@ -20,6 +20,7 @@
 
 % Declaration
 % old: handles.daten.load_balance = zeros(handles.daten.MG,handles.daten.T);
+if exist('cplexlp.m','file')
 array_parks = cell(handles.daten.MG,1);
 array_hydro = cell(handles.daten.MG,1);
 handles.daten.total_hydro = zeros(handles.daten.MG,1);
@@ -66,3 +67,6 @@ handles.daten.nachfrage_after_hydro = handles.daten.nachfrage;
   handles.config.status.imex = true;
   handles.config.status.mp = false;
   disp('Im- & exports optimized');
+else
+  disp('Bitte den Cplex-Solver einbinden. Siehe Ordner Allgemeines');
+end

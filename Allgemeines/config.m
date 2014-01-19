@@ -59,3 +59,6 @@ handles.config.pricecap = inf;
 
 % Admineinstellungen
 handles.config.doc = true;
+
+%Cplex Solver einbinden
+addpath('IBM Cplex Solver/x64_win64/');

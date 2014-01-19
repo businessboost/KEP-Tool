@@ -22,7 +22,7 @@ function varargout = KEP(varargin)
 
 % Edit the above text to modify the response to help KEP
 
-% Last Modified by GUIDE v2.5 12-Jan-2014 23:18:49
+% Last Modified by GUIDE v2.5 19-Jan-2014 20:21:24
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -396,3 +396,19 @@ if strcmp(get(handles.menu_hydro_full,'Checked'),'off')
 else
   set(handles.menu_hydro_full,'Checked','off')
 end
+
+
+% --------------------------------------------------------------------
+function menu_install_solver_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_install_solver (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+
+% --------------------------------------------------------------------
+function Untitled_6_Callback(hObject, eventdata, handles)
+% hObject    handle to Untitled_6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+Cplex_Solver_einbinden;
