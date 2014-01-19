@@ -22,7 +22,7 @@ function varargout = KEP(varargin)
 
 % Edit the above text to modify the response to help KEP
 
-% Last Modified by GUIDE v2.5 19-Jan-2014 21:45:56
+% Last Modified by GUIDE v2.5 19-Jan-2014 23:28:42
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -270,7 +270,7 @@ catch fehler
   disp(fehler);
 end
 if calculation_successfull
-  set(handles.menu_datenspeichern_integral,'Enable','on');
+  set(handles.menu_data_export,'Enable','on');
 end
 
 
@@ -410,3 +410,25 @@ function menu_data_open_entsoe_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 main_data_open_entsoe;
+updategui;
+
+% --------------------------------------------------------------------
+function Untitled_6_Callback(hObject, eventdata, handles)
+% hObject    handle to Untitled_6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+Cplex_Solver_einbinden;
+
+% --------------------------------------------------------------------
+function menu_install_solver_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_install_solver (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function menu_data_export_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_data_export (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+main_data_export;

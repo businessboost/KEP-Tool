@@ -1,7 +1,7 @@
 disp(' entsoe demand ...');
-path = 'C:\Users\mseiffart\repositories\KEP-Tool\Daten\beispiel 1\Eingangsdaten';
-filename = 'entsoe_demand';
- [~,~,demand]=xlsread([path '/' filename]);
+path_demand = 'C:\Users\mseiffart\repositories\KEP-Tool\Daten\beispiel 1\Eingangsdaten';
+filename_demand = 'entsoe_demand';
+ [~,~,demand]=xlsread([path_demand '/' filename_demand]);
  handles.daten.T = 744;
  handles.daten.MG = 10;
  handles.daten.nachfrage = zeros(handles.daten.MG,handles.daten.T);

@@ -2,16 +2,16 @@
     %(Reihenfolge muss der NTC-Matrix und Nachfragematrix entsprechen)
 
 handles.config.marktgebiet = {
-'Belgien'       'B';
-'Dänemark_Ost'  'DK_O';
-'Dänemark_West' 'DK_W';
-'Frankreich'    'F';
-'Niederlande'   'N';
-'Österreich'    'O';
-'Polen'         'Z';
-'Schweiz'       'S';
-'Tschechien'    'C';
-'Deutschland'   'D'
+'Belgien'       'B'       'BE';
+'Dänemark_Ost'  'DK_O'    'DK'; %Muss noch gesplittet werden
+'Dänemark_West' 'DK_W'    'DK'; %Muss noch gesplittet werden
+'Frankreich'    'F'       'FR';
+'Niederlande'   'N'       'NL';
+'Österreich'    'O'       'AT';
+'Polen'         'Z'       'PL';
+'Schweiz'       'S'       'CH';
+'Tschechien'    'C'       'CZ';
+'Deutschland'   'D'       'DE'  % Hier muss noch LU dazu
 };
  
 
