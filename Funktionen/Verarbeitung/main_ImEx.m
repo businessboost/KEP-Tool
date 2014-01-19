@@ -22,13 +22,21 @@
 % old: handles.daten.load_balance = zeros(handles.daten.MG,handles.daten.T);
 array_parks = cell(handles.daten.MG,1);
 array_hydro = cell(handles.daten.MG,1);
+handles.daten.total_hydro = zeros(handles.daten.MG,1);
 
 % create array of all parks
+
   for mg = 1 : handles.daten.MG
     array_parks{mg} = handles.daten.marktgebiet{mg}.kwpark;
     if strcmp(get(handles.menu_hydro_full,'Checked'),'on')
       array_hydro{mg} = handles.daten.marktgebiet{mg}.energiespeicher;
+      if size(array_hydro{mg},1)==0
+        handles.daten.total_hydro(mg,1) = 0;
+      else
+      handles.daten.total_hydro(mg,1) = sum(array_hydro{mg}(:,4));
+      end
     else
+      handles.daten.total_hydro(mg,1) = 0;
       array_hydro = [];
     end
   end
@@ -43,6 +51,7 @@ handles.daten.nachfrage_after_hydro = handles.daten.nachfrage;
       if (size(array_hydro,2)>0)
         for mg = 1 : handles.daten.MG
           if (size(array_hydro{mg},2)>0)
+            
            handles.daten.nachfrage_after_hydro(mg,t) = handles.daten.nachfrage(mg,t) - sum(array_hydro{mg}(:,4));  
           end
          end
@@ -54,4 +63,6 @@ handles.daten.nachfrage_after_hydro = handles.daten.nachfrage;
     exportbalance = sum(exports')'; % eleganter mit dimension
     handles.daten.load_balance(:,t) = handles.daten.nachfrage(:,t) + exportbalance;
   end
+  handles.config.status.imex = true;
+  handles.config.status.mp = false;
   disp('Im- & exports optimized');

@@ -58,5 +58,5 @@ if (handles.config.pfad.eingangsdaten~=0)
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   % Init export and load_balance
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  [handles.daten.exporte, handles.daten.load_balance] = init(handles.daten.MG,handles.daten.T,handles.daten.nachfrage);
+  [handles.daten.exporte, handles.daten.load_balance, handles.daten.total_hydro] = init(handles.daten.MG,handles.daten.T,handles.daten.nachfrage);
 end

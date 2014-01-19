@@ -1,4 +1,4 @@
-function [kep, exports] = opt_imex(MG,ntc,demand,array_parks,array_hydro)
+function [kep, exports] = opt_imex(MG,ntc,demand,array_parks, array_hydro)
 % main_data_open opens all files with the needed data for the kep
 % Input: MG (integer): number of markets
 %        ntc (MGxMG cell): each cell contains the double value of the ntc
@@ -24,25 +24,36 @@ function [kep, exports] = opt_imex(MG,ntc,demand,array_parks,array_hydro)
 %                               markets. Also needed for the lineprog
   
  % connect all parks to one variable
+ model = Cplex('rolfe');
+ model.Model.sense = 'minimize';
  
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% building the lin-problem
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  all_parks = array_parks{1};
+   all_parks = array_parks{1};
   for mg=2:MG
      all_parks = [all_parks; array_parks{mg}];
   end
   
   PP_all = size(all_parks,1);
 
+ 
+ 
+ ctype = '';
+ for i = 1:PP_all
+    ctype = strcat (ctype, 'S');
+ end
+ for i = 1 : MG*MG
+    ctype = strcat (ctype, 'C');
+ end
+ 
+ 
+kvar_ofvector = all_parks(:,2)';
+zero_ofvektor = zeros(1,MG*MG);
+f = [kvar_ofvector zero_ofvektor]; % = costs
+
+
   
-  % Obective Function
-  kvar_ofvector = all_parks(:,2)';
-  zero_ofvektor = zeros(1,MG*MG);
-  f = [kvar_ofvector zero_ofvektor];
-  
+ 
   % Constraints
-    % lower Bound
+    % lower Bound: minArray
       zero_lbvector = zeros(1,PP_all);
       pmin_lbvector = all_parks(:,3)';
       ntc_importvector = [];
@@ -54,8 +65,9 @@ function [kep, exports] = opt_imex(MG,ntc,demand,array_parks,array_hydro)
          temp = temp(:,2:end); % cut of the added column
       end
       
-      lb = [pmin_lbvector -ntc_importvector]; % lower bounds for powerplants is pmin, for the transfers ntc vlaues      
-     % Upper Bound 
+      lb = [pmin_lbvector -ntc_importvector]; % lower bounds for powerplants is pmin, for the transfers ntc vlaues
+     
+     % Upper Bound: max Array 
       pmax_ubvektor = all_parks(:,4)';
       ntc_exportvector = [];
       temp = ntc;
@@ -66,10 +78,11 @@ function [kep, exports] = opt_imex(MG,ntc,demand,array_parks,array_hydro)
           temp = temp(2:end,:); % cut of added row
       end
       ub = [pmax_ubvektor ntc_exportvector];
-      
+      model.addCols(f', [], lb', ub', ctype);
 
      % Lastdeckungsbedingung
-      bineq = -demand; % must be negative, because the standart optimization problem is a<b. here the power must be higher than the demand. a>b = -a<-b-. So right and left side are negated.
+      lhs = demand; % left hand side
+      rhs = ones(MG,1)*inf;
       pp_matrix = zeros(MG,PP_all);
       export_matrix = zeros(MG,MG*MG);
       pp_index_relativ = 0;
@@ -79,8 +92,9 @@ function [kep, exports] = opt_imex(MG,ntc,demand,array_parks,array_hydro)
           export_matrix(mg,MG*(mg-1)+1:MG*mg) = ones(1,MG);
           pp_index_relativ = pp_index_relativ + pp;
       end
-      Aineq = -[pp_matrix -export_matrix];    
-
+      A = [pp_matrix -export_matrix];
+      model.addRows(lhs, A, rhs);
+      
 % antisymmetry: MG*MG constraints 
   Aeq = zeros(MG*MG,MG*MG);
   beq = zeros(MG*MG,1);
@@ -94,16 +108,13 @@ function [kep, exports] = opt_imex(MG,ntc,demand,array_parks,array_hydro)
   end
   zero_matrix = zeros(MG*MG,PP_all);
   Aeq = [zero_matrix Aeq];
+  model.addRows(beq, Aeq, beq);
+  model.solve();
+  x = model.Solution.x;
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% optimization 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-x = linprog(f, Aineq, bineq, Aeq, beq, lb, ub);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% return solution
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 
+  
+  
   for mg = 1 : MG
       pp = size(array_parks{mg},1);
       kep{mg}(1:pp,1) = x(1:pp,1);
