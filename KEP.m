@@ -22,7 +22,7 @@ function varargout = KEP(varargin)
 
 % Edit the above text to modify the response to help KEP
 
-% Last Modified by GUIDE v2.5 08-Jan-2014 23:52:18
+% Last Modified by GUIDE v2.5 19-Jan-2014 21:45:56
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -402,3 +402,11 @@ if strcmp(get(handles.menu_hydro_full,'Checked'),'off')
 else
   set(handles.menu_hydro_full,'Checked','off')
 end
+
+
+% --------------------------------------------------------------------
+function menu_data_open_entsoe_Callback(hObject, eventdata, handles)
+% hObject    handle to menu_data_open_entsoe (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+main_data_open_entsoe;
