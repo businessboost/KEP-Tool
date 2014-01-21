@@ -19,8 +19,8 @@ if (handles.config.pfad.eingangsdaten~=0)
   path = handles.config.pfad.eingangsdaten;
   handles.daten.ntc       = open_ntc_matrix(path,handles.config.dateiname.ntc);
   handles.daten.MG        = size(handles.daten.ntc,1);
-  handles.daten.nachfrage = open_demand(path,handles.config.dateiname.nachfrage);  
-  % main_data_open_entsoe;
+  % handles.daten.nachfrage = open_demand(path,handles.config.dateiname.nachfrage);  
+  main_data_open_entsoe;
   handles.daten.T         = size(handles.daten.nachfrage,2);
 
   % loading powerplantparks
